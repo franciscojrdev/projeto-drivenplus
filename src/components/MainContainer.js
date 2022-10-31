@@ -9,5 +9,6 @@ export const MainContent = styled.div`
   flex-direction: column;
   justify-content: center;
   background-color: black;
+  font-family: "Roboto";
 `;
 

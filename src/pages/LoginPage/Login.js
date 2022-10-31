@@ -2,19 +2,19 @@ import { Form } from "../../components/Form/Form";
 import { MainContent } from "../../components/MainContainer";
 import logo from "../../assets/images/logo.png";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
 export default function Login() {
-
-  const { setToken } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { setPersistToken, setPersistName} = useContext(UserContext);
   const [form, setForm] = useState({ email: "", password: "" });
 
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
-  
+
   function signIn(e) {
     e.preventDefault();
     const URL_LOGIN =
@@ -22,7 +22,13 @@ export default function Login() {
     axios
       .post(URL_LOGIN, form)
       .then((res) => {
-        setToken(res.data.token);
+        setPersistName(res.data.name)
+        setPersistToken(res.data.token);
+        if (res.data.membership === null) {
+          navigate("/subscripitions");
+        }else{
+          navigate("/home",{state:res.data.membership})
+        }
       })
       .catch((err) => console.log(err.response.data.message));
   }
