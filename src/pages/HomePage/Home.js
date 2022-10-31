@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <MainContent>
       <Container>
+        <ProfileImage src={profile} />
         <Header>
-          <img src={location.state.image} />
-          <ProfileImage src={profile} />
+          <img src={location.state.image} alt="plano image"/>
         </Header>
 
         <User>Olá, {name}</User>
@@ -74,7 +74,7 @@ const Header = styled.header`
   align-items: flex-start;
   margin-bottom: 10px;
 
-  div {
+  img {
     height: 50px;
     width: 74px;
   }
@@ -83,6 +83,9 @@ const Header = styled.header`
 const ProfileImage = styled.img`
   height: 34px;
   width: 34px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
   border-radius: 50%;
   object-fit: cover;
 `;

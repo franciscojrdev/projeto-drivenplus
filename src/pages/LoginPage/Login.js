@@ -30,7 +30,9 @@ export default function Login() {
           navigate("/home",{state:res.data.membership})
         }
       })
-      .catch((err) => console.log(err.response.data.message));
+      .catch((err) => {
+        alert("Erro no login")
+        console.log(err.response.data.message)});
   }
   return (
     <MainContent>

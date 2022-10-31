@@ -25,9 +25,12 @@ export default function SignUp() {
       .post(URL, form)
       .then((res) => {
         console.log(res.data);
-        navigate("/")
+        navigate("/");
       })
-      .catch((err) => console.log(err.response.data.message));
+      .catch((err) => {
+        alert("Erro no cadastro");
+        console.log(err.response.data.message);
+      });
   }
   return (
     <MainContent>

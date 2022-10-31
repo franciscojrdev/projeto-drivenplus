@@ -6,8 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
 import list from "../../assets/images/list.svg";
 import money from "../../assets/images/money.svg";
-
-
 import axios from "axios";
 
 export default function ListPlan() {
@@ -21,6 +19,7 @@ export default function ListPlan() {
     securityNumber: "",
     expirationDate: "",
   });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,11 +58,10 @@ export default function ListPlan() {
       .post(URL_POST, form, config)
       .then((res) => {
         console.log(res.data);
-        navigate("/home", { state: res.data.membership});
+        navigate("/home", { state: res.data.membership });
       })
       .catch((err) => console.log(err.response.data.message));
   }
-
   return (
     <MainContent>
       <Link to="/subscripitions">
@@ -124,13 +122,16 @@ export default function ListPlan() {
                 placeholder="Validade"
               />
             </div>
-            <button type="submit">ASSINAR</button>
+            <button type="submit">
+              ASSINAR
+            </button>
           </form>
         </Main>
       </Container>
     </MainContent>
   );
 }
+
 
 const Seta = styled.img`
   height: 32px;

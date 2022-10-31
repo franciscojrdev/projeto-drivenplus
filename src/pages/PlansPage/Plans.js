@@ -31,9 +31,9 @@ export default function Plans() {
       <Container>
         <Title>Escolha seu Plano</Title>
         {plans.map((plan) => (
-          <StyledLink to={`/subscripitions/${plan.id}`}>
+          <StyledLink key={plan.id} to={`/subscripitions/${plan.id}`}>
             <Card>
-              <img src={plan.image} />
+              <img src={plan.image} alt="plan image"/>
               <span>R$ {plan.price}</span>
             </Card>
           </StyledLink>
