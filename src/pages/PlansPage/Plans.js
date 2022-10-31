@@ -5,7 +5,6 @@ import UserContext from "../../context/UserContext";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "./ListPlan";
-// import { Link } from "react-router-dom";
 
 export default function Plans() {
   const { token } = useContext(UserContext);

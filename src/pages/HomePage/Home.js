@@ -15,8 +15,6 @@ export default function Home() {
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  console.log("teste", name);
-
   function cancelPlan() {
     const URL_DEL =
       "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";

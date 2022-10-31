@@ -19,6 +19,7 @@ export default function ListPlan() {
     securityNumber: "",
     expirationDate: "",
   });
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,9 +43,13 @@ export default function ListPlan() {
   function handleForm(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
-  function buyPlan(e) {
-    e.preventDefault();
 
+  function showCard(e) {
+    e.preventDefault();
+    setShow(true);
+  }
+
+  function buyPlan() {
     const URL_POST =
       "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
 
@@ -62,8 +67,26 @@ export default function ListPlan() {
       })
       .catch((err) => console.log(err.response.data.message));
   }
+
   return (
     <MainContent>
+      <Modal showModal={show ? "flex" : "none"}>
+        <Section>
+          <h1>
+            Tem certeza que deseja assinar o plano {items.name} (R${" "}
+            {items.price})?
+          </h1>
+          <div>
+            <ButtonCard cor="#CECECE" onClick={() => setShow(false)}>
+              Não
+            </ButtonCard>
+            <ButtonCard cor="#FF4791" onClick={buyPlan}>
+              SIM
+            </ButtonCard>
+          </div>
+        </Section>
+      </Modal>
+
       <Link to="/subscripitions">
         <Seta src={seta} />
       </Link>
@@ -86,7 +109,7 @@ export default function ListPlan() {
           </Labels>
           <h2>R$ {items.price} cobrados mensalmente</h2>
 
-          <form onSubmit={buyPlan}>
+          <form onSubmit={showCard}>
             <input
               type="text"
               name="cardName"
@@ -122,9 +145,7 @@ export default function ListPlan() {
                 placeholder="Validade"
               />
             </div>
-            <button type="submit">
-              ASSINAR
-            </button>
+            <button type="submit">ASSINAR</button>
           </form>
         </Main>
       </Container>
@@ -132,6 +153,52 @@ export default function ListPlan() {
   );
 }
 
+const Modal = styled.div`
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: ${(props) => props.showModal};
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 14, 19, 0.3);
+  justify-content: center;
+  align-items: center;
+`;
+const Section = styled.section`
+  height: 210px;
+  width: 248px;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 52px;
+  }
+`;
+
+const ButtonCard = styled.button`
+  width: 95px;
+  height: 52px;
+  background-color: ${(props) => props.cor};
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+`;
 
 const Seta = styled.img`
   height: 32px;

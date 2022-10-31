@@ -10,6 +10,6 @@ export const MainContent = styled.div`
   justify-content: center;
   background-color: black;
   font-family: "Roboto";
-  position: relative;
+  position: static;
 `;
 
